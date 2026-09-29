@@ -346,7 +346,7 @@
     "hostPack": {
         "title": "Zainstaluj dodatek",
         "intoHost": "To jest dodatek do {hostName}. Zainstalować {count} w nim?",
-        "requiresHost": "Ten dodatek instaluje się do {hostName}, które nie jest jeszcze zainstalowane. Najpierw zainstaluj {hostName}, a następnie ten dodatek.",
+        "requiresHost": "Ten dodatek instaluje się do {hostName}, które nie jest jeszcze zainstalowane. Zainstaluj je najpierw, a następnie ten dodatek.",
         "installHost": "Zainstaluj {hostName}",
         "install": "Zainstaluj ({count})",
         "installing": "Instalowanie..."
