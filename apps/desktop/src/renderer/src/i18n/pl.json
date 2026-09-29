@@ -26,6 +26,7 @@
     },
     "app": {
         "modsHidden": "Mody są ukryte – gra została uruchomiona bez modów, ale być może nadal działa.",
+        "stateUnreadable": "Modrex nie mógł odczytać własnej listy modów dla tej gry, poniższe mody zostały znalezione podczas skanowania folderu i żadne zmiany nie są zapisywane. Szczegóły znajdują się w logu.",
         "restoreMods": "Przywróć mody",
         "updateAction": "Aktualizuj",
         "updateInstall": "Uruchom ponownie i zainstaluj",
@@ -58,11 +59,12 @@
         "maximize": "Rozwiń",
         "restore": "Przywróć",
         "close": "Zamknij",
-        "missingLaunchOption": {
-            "title": "Brak opcji uruchamiania",
-            "bodyPre": "jest zalecane, aby większość modów działała poprawnie. Dodaj je w",
-            "location": "Ustawienia > Opcje uruchamiania",
-            "launchAnyway": "Uruchom mimo wszystko"
+        "sisr": {
+            "unsupported": "Automatyczne uruchamianie SISR nie jest obsługiwane w tym systemie operacyjnym. Gra została uruchomiona bez SISR.",
+            "notInstalled": "Nie znaleziono SISR. Gra została uruchomiona bez SISR.",
+            "setupRequired": "SISR wymaga konfiguracji przy pierwszym uruchomieniu, aby przekierowanie kontrolera mogło działać. Gra została mimo to uruchomiona.",
+            "startFailed": "Nie udało się uruchomić SISR. Gra została uruchomiona bez SISR.",
+            "startUnconfirmed": "Modrex nie mógł potwierdzić uruchomienia SISR. Gra została mimo to uruchomiona."
         }
     },
     "sidebar": {
@@ -144,6 +146,9 @@
         "filterPlaceholder": "Wyszukiwanie modów...",
         "filterEmpty": "Żaden mod nie pasuje do \"{query}\"",
         "reinstallFailed": "Ponowna instalacja nie powiodła się: {error}",
+        "actionFailed": "Nie udało się zmienić {name}: {error}",
+        "actionFailedSome": "Nie udało się zmienić {count} modów ({names}): {error}",
+        "refreshFailed": "Nie udało się odświeżyć listy zainstalowanych modów: {error}",
         "updatesAvailable": "{count} modów można zaktualizować",
         "updatesAvailableSingle": "{count} mod można zaktualizować",
         "reviewUpdates": "Przejrzyj aktualizacje",
@@ -179,6 +184,18 @@
             "updatingProgress": "Aktualizowanie {done} / {total}",
             "updateSelected": "Aktualizuj wybrane ({count})",
             "error": "Aktualizacja nie powiodła się. Sprawdź połączenie i spróbuj ponownie."
+        },
+        "pakViewer": {
+            "title": "Zawartość pliku pak",
+            "open": "Wyświetl zawartość pliku pak",
+            "searchPlaceholder": "Wyszukaj assety",
+            "assetCount": "{count} assetów",
+            "matchCount": "{count} z {total} assetów",
+            "loading": "Odczytywanie pliku pak",
+            "empty": "Nie znaleziono assetów",
+            "noMatches": "Żaden asset nie pasuje do \"{query}\"",
+            "error": "Nie udało się odczytać pliku pak.",
+            "aesHint": "Zaszyfrowane pliki pak wymagają klucza AES tej gry."
         },
         "modMenu": {
             "open": "Opcje",
@@ -268,269 +285,306 @@
             "views": "Wyświetlenia"
         },
         "info": {
-            "version": "! Version",
-            "published": "! Published",
-            "updated": "! Updated",
-            "repository": "! Repository",
-            "link": "! Link",
-            "tags": "! Tags",
-            "members": "! Members",
-            "owner": "! Owner"
+            "version": "Wersja",
+            "published": "Opublikowano",
+            "updated": "Zaktualizowano",
+            "repository": "Repozytorium",
+            "link": "Link",
+            "tags": "Tagi",
+            "members": "Członkowie",
+            "owner": "Właściciel"
         },
         "description": {
-            "noDescription": "! No description provided."
+            "noDescription": "Brak opisu."
         },
         "images": {
-            "none": "! No images uploaded for this mod."
+            "none": "Brak obrazów dla tego moda."
         },
         "downloads": {
-            "none": "! No files available.",
-            "onNexus": "! Files for this mod are on Nexus Mods.",
-            "external": "! Download",
-            "count": "! {count} dl",
-            "viaNexus": "! Download via Nexus",
-            "awaitingNexus": "! Waiting for browser...",
-            "categoryMain": "! Main files",
-            "categoryUpdate": "! Updates",
-            "categoryOptional": "! Optional files",
-            "categoryOldVersion": "! Old versions",
-            "categoryMiscellaneous": "! Miscellaneous"
+            "none": "Brak dostępnych plików.",
+            "onNexus": "Pliki tego moda są dostępne na Nexus Mods.",
+            "external": "Pobierz",
+            "count": "{count} pob.",
+            "viaNexus": "Pobierz przez Nexus",
+            "awaitingNexus": "Oczekiwanie na przeglądarkę...",
+            "categoryMain": "Główne pliki",
+            "categoryUpdate": "Aktualizacje",
+            "categoryOptional": "Pliki opcjonalne",
+            "categoryOldVersion": "Stare wersje",
+            "categoryMiscellaneous": "Różne"
         },
         "deps": {
-            "instructions": "! Installation Instructions",
-            "dependencies": "! Dependencies",
-            "statusInstalled": "! Installed",
-            "statusMissing": "! Missing",
-            "statusNotInstalled": "! Not installed",
-            "badgeRequired": "! Required",
-            "badgeOptional": "! Optional",
-            "openOnSite": "! Open on modworkshop.net"
+            "instructions": "Instrukcja instalacji",
+            "dependencies": "Zależności",
+            "statusInstalled": "Zainstalowano",
+            "statusMissing": "Brak",
+            "statusNotInstalled": "Niezainstalowane",
+            "badgeRequired": "Wymagane",
+            "badgeOptional": "Opcjonalne",
+            "openOnSite": "Otwórz na modworkshop.net"
         }
     },
     "embed": {
-        "videoThumbnail": "! Video thumbnail",
-        "play": "! Play video",
-        "openInBrowser": "! Open in browser"
+        "videoThumbnail": "Miniatura filmu",
+        "play": "Odtwórz film",
+        "openInBrowser": "Otwórz w przeglądarce"
     },
     "fileSelect": {
-        "title": "! Install files",
-        "subtitle": "! {modName}: select which files to install.",
-        "installSelected": "! Install Selected ({count})"
+        "title": "Zainstaluj pliki",
+        "subtitle": "{modName}: wybierz pliki do zainstalowania.",
+        "installSelected": "Zainstaluj wybrane ({count})"
     },
     "zipPicker": {
-        "title": "! Install from archive",
-        "subtitle": "! {modName}: select which files to install.",
-        "installSelected": "! Install Selected ({count})",
-        "selectAll": "! Select all ({count})",
-        "deselectAll": "! Deselect all",
-        "targetMods": "! Mods",
-        "targetOverrides": "! Asset overrides"
+        "title": "Zainstaluj z archiwum",
+        "subtitle": "{modName}: wybierz pliki do zainstalowania.",
+        "installSelected": "Zainstaluj wybrane ({count})",
+        "selectAll": "Zaznacz wszystkie ({count})",
+        "deselectAll": "Odznacz wszystkie",
+        "targetMods": "Mody",
+        "targetOverrides": "Zamiana assetów"
     },
     "hostPack": {
-        "title": "! Install add-on",
-        "intoHost": "! This is an add-on for {hostName}. Install {count} into it?",
-        "requiresHost": "! This add-on installs into {hostName}, which isn't installed yet. Install it first, then install this add-on.",
-        "installHost": "! Install {hostName}",
-        "install": "! Install ({count})",
-        "installing": "! Installing..."
+        "title": "Zainstaluj dodatek",
+        "intoHost": "To jest dodatek do {hostName}. Zainstalować {count} w nim?",
+        "requiresHost": "Ten dodatek instaluje się do {hostName}, które nie jest jeszcze zainstalowane. Najpierw zainstaluj {hostName}, a następnie ten dodatek.",
+        "installHost": "Zainstaluj {hostName}",
+        "install": "Zainstaluj ({count})",
+        "installing": "Instalowanie..."
     },
     "unrecognized": {
-        "title": "! Couldn't place this mod",
-        "body": "! Modrex couldn't tell where this mod installs; it likely belongs inside another mod. Follow the author's instructions:",
-        "noInstructions": "! The author didn't include installation instructions. Check the mod's page on ModWorkshop."
+        "title": "Nie udało się umieścić tego moda",
+        "body": "Modrex nie mógł ustalić, gdzie należy zainstalować ten mod; prawdopodobnie powinien znajdować się wewnątrz innego moda. Postępuj zgodnie z instrukcjami autora:",
+        "noInstructions": "Autor nie podał instrukcji instalacji. Sprawdź stronę moda na ModWorkshop."
     },
     "cbFlatArchive": {
-        "title": "! Install as a mod folder?",
-        "body": "! This archive doesn't have its own enclosing folder, so Modrex can't auto-detect a mod name from it. Install all of its contents as \"{name}\" under CrimeBoss/Mods?",
-        "install": "! Install",
-        "installing": "! Installing..."
+        "title": "Zainstalować jako folder moda?",
+        "body": "To archiwum nie zawiera własnego folderu nadrzędnego, więc Modrex nie może automatycznie wykryć nazwy moda. Zainstalować całą jego zawartość jako \\\"{name}\\\" w CrimeBoss/Mods?",
+        "install": "Zainstaluj",
+        "installing": "Instalowanie..."
+    },
+    "ue4ssReplace": {
+        "title": "Zastąpić zainstalowany UE4SS?",
+        "body": "{name} zastępuje już zainstalowany UE4SS. Zainstalowana wersja zostanie najpierw usunięta: oba rozwiązania umieszczają pliki silnika i ustawienia w różnych miejscach, więc pozostawienie jej spowodowałoby załadowanie obu.",
+        "removed": "Usunięto",
+        "kept": "Pozostawiono",
+        "nothingOfYours": "Nie masz własnych modów w folderze Mods loadera.",
+        "modsListNote": "Twoje własne mody zachowują swoje wpisy na liście modów loadera.",
+        "replace": "Zastąp",
+        "replacing": "Zastępowanie..."
+    },
+    "ue4ssRemove": {
+        "title": "Usunąć UE4SS?",
+        "body": "UE4SS odpowiada za ładowanie modów Lua, więc jego usunięcie spowoduje, że przestaną one działać do czasu ponownej instalacji. Usunięte zostaną tylko pliki zainstalowane przez UE4SS.",
+        "removed": "Usunięto",
+        "kept": "Pozostawiono",
+        "nothingOfYours": "Nie masz własnych modów w folderze Mods loadera.",
+        "removing": "Usuwanie..."
     },
     "depsWarning": {
-        "title": "! Missing required dependencies",
-        "body": "! This mod requires the following mods to be installed:",
-        "gotIt": "! Got it",
-        "installAll": "! Install all",
-        "installFailed": "! Install failed",
-        "bltDiesel3Note": "! Official SuperBLT doesn't support Diesel 3.0 yet.",
-        "bltDiesel3GitHub": "! Get from GitHub"
+        "title": "Brak wymaganych zależności",
+        "body": "Ten mod wymaga zainstalowania następujących modów:",
+        "gotIt": "Rozumiem",
+        "installAll": "Zainstaluj wszystkie",
+        "installFailed": "Instalacja nie powiodła się",
+        "bltDiesel3Note": "Oficjalny SuperBLT nie obsługuje jeszcze Diesel 3.0 yet.",
+        "bltDiesel3GitHub": "Pobierz z GitHub"
     },
     "crimeBossInstallChoice": {
-        "title": "! Where should \"{name}\" install?",
-        "body": "! Mods/ merges with other mods' content. ~mods is the older format with no merging.",
-        "auto": "! Mods/ (ModKit)",
-        "legacy": "! ~mods (legacy pak)",
-        "installing": "! Installing...",
-        "error": "! Install failed: {error}"
+        "title": "Gdzie zainstalować \"{name}\"?",
+        "body": "Mods/ łączy zawartość z innymi modami. ~mods to starszy format bez łączenia zawartości.",
+        "auto": "Mods/ (ModKit)",
+        "legacy": "~mods (starszy pak)",
+        "installing": "Instalowanie...",
+        "error": "Instalacja nie powiodła się: {error}"
     },
     "settings": {
-        "title": "! Settings",
+        "title": "Ustawienia",
         "language": {
-            "title": "! Language",
-            "description": "! Language used throughout the app."
+            "title": "Język",
+            "description": "Język używany w całej aplikacji."
+        },
+        "accentColor": {
+            "title": "Kolor akcentu",
+            "description": "Kolor akcentu używany w całej aplikacji.",
+            "orange": "Pomarańczowy",
+            "purple": "Fioletowy",
+            "green": "Zielony",
+            "blue": "Niebieski",
+            "red": "Czerwony",
+            "gray": "Szary"
         },
         "gamePath": {
-            "title": "! Game Path",
-            "description": "! Path to your {game} installation. Detected automatically from your installed launchers if not set manually.",
-            "notFound": "! Not found",
-            "detecting": "! Detecting...",
-            "reset": "! Reset",
-            "browse": "! Browse",
-            "pickTitle": "! Select {game} installation folder",
-            "picking": "! Picking...",
-            "autoDetected": "! Auto-detected",
-            "notDetected": "! Could not detect {game} installation; set the path manually.",
-            "invalid": "! Selected folder is not a valid {game} installation."
+            "title": "Ścieżka gry",
+            "description": "Ścieżka do instalacji {game}. Jeśli nie zostanie ustawiona ręcznie, zostanie wykryta automatycznie na podstawie zainstalowanych launcherów.",
+            "notFound": "Nie znaleziono",
+            "detecting": "Wykrywanie...",
+            "reset": "Resetuj",
+            "browse": "Przeglądaj",
+            "pickTitle": "Wybierz folder instalacji {game}",
+            "picking": "Wybieranie...",
+            "autoDetected": "Wykryto automatycznie",
+            "notDetected": "Nie udało się wykryć instalacji {game}; ustaw ścieżkę ręcznie.",
+            "invalid": "Wybrany folder nie jest prawidłową instalacją {game}."
         },
         "launcher": {
-            "title": "! Launcher",
-            "description": "! How to launch {game}. Detected automatically from your installed stores.",
-            "detecting": "! Detecting...",
-            "steam": "! Steam",
-            "epic": "! Epic Games",
-            "xbox": "! Xbox",
-            "manual": "! Manual (launch executable directly)",
-            "switchFailed": "! That copy of the game is no longer where it was found; pick the folder manually.",
-            "multipleCopies": "! {count} copies found; the selected launcher decides which one Modrex mods and launches."
+            "title": "Launcher",
+            "description": "Sposób uruchamiania {game}. Jest wykrywany automatycznie na podstawie zainstalowanych sklepów.",
+            "detecting": "Wykrywanie...",
+            "steam": "Steam",
+            "epic": "Epic Games",
+            "xbox": "Xbox",
+            "manual": "Ręcznie (uruchom plik wykonywalny bezpośrednio)",
+            "switchFailed": "Ta kopia gry nie znajduje się już w wykrytej lokalizacji; wybierz folder ręcznie.",
+            "multipleCopies": "Znaleziono {count} kopii; wybrany launcher określa, którą z nich Modrex modyfikuje i uruchamia."
         },
         "launchOptions": {
-            "title": "! Launch Options",
-            "descriptionPre": "! Extra arguments passed to PAYDAY 3 on launch.",
-            "descriptionPost": "! is recommended for most mods to load correctly.",
-            "xboxNotePre": "! Launch options are not supported on Microsoft Store. To enable mod logging, add",
-            "xboxNotePost": "! in the Xbox app under PAYDAY 3 > Manage > Launch options."
+            "title": "Opcje uruchamiania",
+            "description": "{flag} jest wymagane, aby większość modów tej gry ładowała się poprawnie.",
+            "xboxNote": "Opcje uruchamiania nie są obsługiwane w Microsoft Store."
         },
         "crashReporter": {
-            "title": "! Crash reporter cleanup",
-            "description": "! Work around an empty crash-report window for games that ship a buggy reporter by removing its crash reporter files before launch. This is off by default and may not be needed for every game."
+            "title": "Czyszczenie raportera awarii",
+            "description": "Obejście problemu z pustym oknem raportowania awarii w grach, które zawierają wadliwy reporter, poprzez usunięcie jego plików przed uruchomieniem gry. Ta opcja jest domyślnie wyłączona i może nie być potrzebna w każdej grze."
+        },
+        "sisr": {
+            "title": "Automatyczne uruchamianie SISR",
+            "description": "Uruchamiaj SISR (Steam Input System Redirector) przed uruchomieniem gry, jeśli nie jest już uruchomiony, aby kontrolery Steam Input działały z grami uruchamianymi spoza Steam.",
+            "running": "SISR uruchomiony",
+            "notRunning": "SISR nie jest uruchomiony. Zostanie uruchomiony podczas uruchamiania gry.",
+            "notInstalled": "Nie znaleziono SISR w domyślnej lokalizacji instalacji.",
+            "setupRequired": "Przed użyciem automatycznego uruchamiania dokończ pierwszą konfigurację SISR w Steam.",
+            "setup": "Skonfiguruj SISR",
+            "finishSetup": "Dokończ konfigurację",
+            "failed": "Nie udało się skonfigurować SISR: {error}"
         },
         "updates": {
-            "title": "! Updates",
-            "check": "! Check for updates",
-            "checking": "! Checking...",
-            "upToDate": "! You're up to date"
+            "title": "Aktualizacje",
+            "check": "Sprawdź aktualizacje",
+            "checking": "Sprawdzanie...",
+            "upToDate": "Masz najnowszą wersję"
         },
         "logs": {
-            "title": "! Logs",
-            "description": "! If something goes wrong, open the log file and attach it to your bug report.",
-            "open": "! Open log file"
+            "title": "Logi",
+            "description": "Jeśli coś pójdzie nie tak, otwórz plik logu i dołącz go do zgłoszenia błędu.",
+            "open": "Otwórz plik logu"
         },
         "nexusAccount": {
-            "title": "! Nexus Mods Account",
-            "description": "! Sign in with your Nexus Mods account in your browser. Tokens are stored locally and never leave this device.",
-            "signIn": "! Sign in with Nexus Mods",
-            "signOut": "! Sign out",
-            "signedIn": "! Signed in to Nexus Mods.",
-            "failed": "! Sign-in failed: {error}",
-            "sessionExpired": "! Your sign-in expired and was cleared. This happens when the session is revoked, the account password changes, or Modrex goes unused long enough for it to lapse.",
-            "signOutConfirmTitle": "! Sign out of Nexus Mods?",
-            "signOutConfirmBody": "! You'll need to sign in again in your browser to browse and install Nexus Mods.",
-            "signOutConfirm": "! Sign out",
-            "insecureStorage": "! Your Nexus Mods sign-in is stored less securely because no OS credential store is available. On Linux, install and enable a Secret Service provider such as gnome-keyring or KWallet, then restart Modrex to fix this."
+            "title": "Konto Nexus Mods",
+            "description": "Zaloguj się na swoje konto Nexus Mods w przeglądarce. Tokeny są przechowywane lokalnie i nigdy nie opuszczają tego urządzenia.",
+            "signIn": "Zaloguj się do Nexus Mods",
+            "signOut": "Wyloguj się",
+            "signedIn": "Zalogowano do Nexus Mods.",
+            "failed": "Logowanie nie powiodło się: {error}",
+            "sessionExpired": "Twoja sesja logowania wygasła i została usunięta. Może się tak zdarzyć po unieważnieniu sesji, zmianie hasła do konta lub po dłuższym nieużywaniu Modrex.",
+            "signOutConfirmTitle": "Wylogować z Nexus Mods?",
+            "signOutConfirmBody": "Aby przeglądać i instalować mody z Nexus Mods, musisz ponownie zalogować się w przeglądarce.",
+            "signOutConfirm": "Wyloguj się",
+            "insecureStorage": "Dane logowania do Nexus Mods są przechowywane w mniej bezpieczny sposób, ponieważ nie jest dostępny systemowy magazyn poświadczeń. W systemie Linux zainstaluj i włącz dostawcę Secret Service, takiego jak gnome-keyring lub KWallet, a następnie uruchom ponownie Modrex, aby to naprawić."
         },
         "folders": {
-            "title": "! Folders",
-            "description": "! Open these locations in your file manager.",
-            "gameFolder": "! Open game folder",
-            "dataFolder": "! Open data folder",
-            "appFolder": "! Open app folder",
-            "open": "! Open {name}",
-            "mods": "! Mods",
-            "modkitMods": "! ModKit mods",
-            "legacyPaks": "! Legacy paks",
-            "overrides": "! Asset overrides",
-            "ue4ssMods": "! UE4SS mods"
+            "title": "Foldery",
+            "description": "Otwórz te lokalizacje w menedżerze plików.",
+            "gameFolder": "Otwórz folder gry",
+            "dataFolder": "Otwórz folder danych",
+            "appFolder": "Otwórz folder aplikacji",
+            "open": "Otwórz {name}",
+            "mods": "Mody",
+            "modkitMods": "Mody ModKit",
+            "legacyPaks": "Stare pakiety",
+            "overrides": "Nadpisania assetów",
+            "ue4ssMods": "Mody UE4SS"
         },
         "storage": {
-            "title": "! Storage",
-            "dangerZone": "! Danger zone",
-            "dangerZoneDescription": "! These actions delete locally stored data. Caches free disk space and rebuild automatically as you use the app; resetting restores default settings. None of them remove your installed mods or game files.",
-            "clearing": "! Clearing...",
-            "clearImages": "! Clear images",
-            "clearModInfo": "! Clear mod info",
-            "clearDatabase": "! Clear database",
-            "clearNews": "! Clear news",
-            "clearAll": "! Clear all caches",
-            "clearAllLabel": "! All caches",
-            "clearAllDescription": "! Clears cached images, mod info, the identification database, and news together.",
-            "clearConfirmTitle": "! Clear {name}?",
-            "clearConfirmBody": "! This deletes the cached data now. Modrex rebuilds it automatically as you use the app.",
-            "clearAllConfirmTitle": "! Clear all caches?",
-            "clearAllConfirmBody": "! This deletes all cached images, mod info, the identification database, and news. Modrex rebuilds them automatically as you use the app.",
-            "freed": "! Freed {size}",
-            "cachedImages": "! Cached images",
-            "cachedImagesDescription": "! Mod thumbnails and banners from ModWorkshop.",
-            "cachedModInfo": "! Cached mod info",
-            "cachedModInfoDescription": "! Saved mod names, versions, and details.",
-            "modIndex": "! Mod identification database",
-            "modIndexDescription": "! The hash index used to recognize your installed mods.",
-            "news": "! Cached news",
-            "newsDescription": "! Saved copies of the in-app news pages.",
-            "reset": "! Reset settings",
-            "resetDescription": "! Restore all app settings to their defaults.",
-            "resetConfirmTitle": "! Reset settings?",
-            "resetConfirmBody": "! This clears your saved game paths, launcher choices, preferences, and analytics choice, then returns Modrex to its first-run state. Your installed mods and game files are not affected.",
-            "resetConfirm": "! Reset settings",
-            "resetting": "! Resetting..."
+            "title": "Magazyn",
+            "dangerZone": "Strefa zagrożenia",
+            "dangerZoneDescription": "Te działania usuwają dane przechowywane lokalnie. Bufor zwalnia miejsce na dysku i jest automatycznie odbudowywana podczas korzystania z aplikacji; reset przywraca ustawienia domyślne. Żadne z tych działań nie usuwa zainstalowanych modów ani plików gry.",
+            "clearing": "Czyszczenie...",
+            "clearImages": "Wyczyść obrazy",
+            "clearModInfo": "Wyczyść informacje o modach",
+            "clearDatabase": "Wyczyść bazę danych",
+            "clearNews": "Wyczyść aktualności",
+            "clearAll": "Wyczyść bufor",
+            "clearAllLabel": "Cały bufor",
+            "clearAllDescription": "Usuwa jednocześnie zapisane obrazy, informacje o modach, bazę danych identyfikacji i aktualności.",
+            "clearConfirmTitle": "Wyczyścić {name}?",
+            "clearConfirmBody": "Spowoduje to usunięcie zapisanych danych. Modrex automatycznie odbuduje je podczas korzystania z aplikacji.",
+            "clearAllConfirmTitle": "Wyczyścić cały bufor",
+            "clearAllConfirmBody": "Spowoduje to usunięcie wszystkich zapisanych obrazów, informacji o modach, bazy danych identyfikacji i aktualności. Modrex automatycznie odbuduje je podczas korzystania z aplikacji.",
+            "freed": "Zwolniono {size}",
+            "cachedImages": "Zapisane obrazy",
+            "cachedImagesDescription": "Miniatury i banery modów z ModWorkshop.",
+            "cachedModInfo": "Zapisane informacje o modach",
+            "cachedModInfoDescription": "Zapisane nazwy, wersje i szczegóły modów.",
+            "modIndex": "Baza danych identyfikacji modów",
+            "modIndexDescription": "Indeks hash używany do rozpoznawania zainstalowanych modów.",
+            "news": "Zapisane aktualności",
+            "newsDescription": "Zapisane kopie stron z aktualnościami w aplikacji.",
+            "reset": "Resetuj ustawienia",
+            "resetDescription": "Przywróć wszystkie ustawienia aplikacji do wartości domyślnych.",
+            "resetConfirmTitle": "Zresetować ustawienia?",
+            "resetConfirmBody": "Spowoduje to usunięcie zapisanych ścieżek gier, wybranych launcherów, preferencji i ustawienia dotyczącego analityki, a następnie przywróci Modrex do stanu początkowej konfiguracji. Zainstalowane mody i pliki gry nie zostaną zmienione.",
+            "resetConfirm": "Resetuj ustawienia",
+            "resetting": "Resetowanie..."
         },
         "crimeBossInstallMode": {
-            "title": "! New Mod Installs",
-            "description": "! Where new Crime Boss mods go by default. You can also move an already-installed mod later from the Installed list.",
-            "auto": "! Automatic",
-            "ask": "! Always ask"
+            "title": "Nowe instalacje modów",
+            "description": "Określa, gdzie domyślnie trafiają nowe mody do Crime Boss. Zainstalowany mod można później przenieść z listy zainstalowanych modów.",
+            "auto": "Automatycznie",
+            "ask": "Zawsze pytaj"
         },
         "about": {
-            "tagline": "! Free and open-source mod manager.",
-            "supportTitle": "! Support the project",
-            "supportBody": "! Modrex is free and built in spare time. If it saves you time, a GitHub star or a sponsorship helps keep it going.",
-            "star": "! Star on GitHub",
-            "sponsor": "! Sponsor",
-            "communityTitle": "! Community",
-            "discord": "! Join the Discord",
-            "x": "! Follow on X",
-            "bluesky": "! Follow on Bluesky",
-            "website": "! modrex.net",
-            "disclaimer": "! Modrex is a community project and is not affiliated with the developers or publishers of the supported games."
+            "tagline": "Darmowy oraz open-source menedżer modów.",
+            "supportTitle": "Sponsorować projekt",
+            "supportBody": "Modrex jest darmowy i tworzony w wolnym czasie. Jeśli oszczędza Ci czas, gwiazdka na GitHubie lub sponsoring pomagają w dalszym rozwoju projektu.",
+            "star": "Gwiazdka na GitHubie",
+            "sponsor": "Zasponsoruj",
+            "communityTitle": "Społeczność",
+            "discord": "Dołącz do Discorda",
+            "x": "Obserwuj na X",
+            "bluesky": "Obserwuj na Bluesky",
+            "website": "modrex.net",
+            "disclaimer": "Modrex jest projektem społecznościowym i nie jest powiązany z twórcami ani wydawcami obsługiwanych gier."
         },
         "nav": {
-            "game": "! Game",
-            "application": "! Application",
-            "advanced": "! Advanced",
-            "about": "! About"
+            "game": "Gra",
+            "application": "Aplikacja",
+            "advanced": "Dodatkowo",
+            "about": "O aplikacji"
         }
     },
     "supportPrompt": {
-        "body": "! Enjoying Modrex? A star on GitHub helps other players find it.",
-        "star": "! Star on GitHub",
-        "dismiss": "! No thanks"
+        "body": "Podoba Ci się Modrex? Gwiazdka na GitHubie pomoże innym graczom go znaleźć.",
+        "star": "Gwiazdka na GitHubie",
+        "dismiss": "Nie, dziękuję"
     },
     "telemetry": {
-        "title": "! Help improve Modrex",
-        "intro": "! Modrex can send anonymous usage data so we can see which mods break, which games need attention, and what to build next. It's optional, and you can change this anytime in Settings.",
-        "collectTitle": "! What we collect",
-        "collect1": "! Anonymous usage: features used, mods installed, and how well mods are identified",
-        "collect2": "! Your app version and operating system",
-        "dontCollectTitle": "! What we never collect",
-        "dontCollect1": "! No names, emails, accounts, or anything that identifies you",
-        "dontCollect2": "! No file paths, mod search text, or other personal data",
-        "enable": "! Enable",
-        "decline": "! No thanks",
-        "detailsToggle": "! What data is collected?",
-        "privacyPrefix": "! Usage data is processed by Google Analytics. See",
-        "privacyLink": "! Google's Privacy Policy",
-        "settingsTitle": "! Usage analytics",
-        "settingsDescription": "! Share anonymous usage data to help improve Modrex.",
-        "discordPresenceTitle": "! Discord Rich Presence",
-        "discordPresenceDescription": "! Show Modrex activity on your Discord profile with a link to the app."
+        "title": "Pomóż ulepszać Modrex",
+        "intro": "Modrex może wysyłać anonimowe dane dotyczące użytkowania, abyśmy mogli sprawdzić, które mody powodują problemy, które gry wymagają uwagi i co warto stworzyć w następnej kolejności. Jest to opcjonalne i możesz zmienić tę opcję w dowolnym momencie w Ustawieniach.",
+        "collectTitle": "Co zbieramy",
+        "collect1": "Anonimowe dane dotyczące użytkowania: używane funkcje, zainstalowane mody i skuteczność ich identyfikacji",
+        "collect2": "Twoje wersję aplikacji i system operacyjny",
+        "dontCollectTitle": "Czego nigdy nie zbieramy",
+        "dontCollect1": "Żadnych imion, adresów e-mail, kont ani innych danych pozwalających Cię zidentyfikować",
+        "dontCollect2": "Żadnych ścieżek plików, tekstów wyszukiwania modów ani innych danych osobowych",
+        "enable": "Włącz",
+        "decline": "Nie, dziękuję",
+        "detailsToggle": "Jakie dane są zbierane?",
+        "privacyPrefix": "Dane dotyczące użytkowania są przetwarzane przez Google Analytics. Zobacz",
+        "privacyLink": "Politykę prywatności Google",
+        "settingsTitle": "Analityka użytkowania",
+        "settingsDescription": "Udostępniaj anonimowe dane dotyczące użytkowania, aby pomóc ulepszać Modrex.",
+        "discordPresenceTitle": "Discord Rich Presence",
+        "discordPresenceDescription": "Pokazuj aktywność Modrex na swoim profilu Discord wraz z linkiem do aplikacji."
     },
     "drop": {
-        "overlayTitle": "! Drop to install",
-        "overlaySubtitle": "! Release to install into {game}",
-        "installing": "! Installing...",
-        "installingCount": "! Installing {current} of {total}...",
-        "installed": "! Installed {count} mods",
-        "installedSingle": "! Installed 1 mod",
-        "needsPicker": "! Some archives must be installed from their mod page for now",
-        "failed": "! Could not install: {names}",
-        "noGame": "! Set your game folder before dropping mods"
+        "overlayTitle": "Upuść, aby zainstalować",
+        "overlaySubtitle": "Puść, aby zainstalować w {game}",
+        "installing": "Instalowanie...",
+        "installingCount": "Instalowanie {current} z {total}...",
+        "installed": "Zainstalowano {count} modów",
+        "installedSingle": "Zainstalowano 1 mod",
+        "needsPicker": "Niektóre archiwa trzeba obecnie zainstalować ze strony ich moda",
+        "failed": "Nie udało się zainstalować: {names}",
+        "noGame": "Ustaw folder gry przed upuszczeniem modów"
     }
 }
