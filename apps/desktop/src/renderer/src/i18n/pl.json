@@ -102,6 +102,7 @@
         "tagFilterEmpty": "Nie znaleziono tagów",
         "noMods": "Nie znaleziono modów",
         "loadFailed": "Nie udało się załadować modów",
+        "filterLoadFailed": "Nie udało się załadować filtrów: {error}",
         "rateLimited": "ModWorkshop ogranicza obecnie liczbę żądań. Spróbuj ponownie za chwilę.",
         "modCount": "{total} modów",
         "sort": {
@@ -178,12 +179,17 @@
             "staleDuplicateHint": "To pozostałość po starej wersji pakietu pobierania tego pliku — można ją bezpiecznie usunąć."
         },
         "updatesModal": {
+            "versionChange": "{from} do {to}",
+            "versionAvailable": "{version} dostępna",
             "title": "Dostępne aktualizacje ({count})",
             "update": "Aktualizuj",
             "updating": "Aktualizowanie...",
             "updatingProgress": "Aktualizowanie {done} / {total}",
             "updateSelected": "Aktualizuj wybrane ({count})",
-            "error": "Aktualizacja nie powiodła się. Sprawdź połączenie i spróbuj ponownie."
+            "error": "Aktualizacja nie powiodła się. Sprawdź połączenie i spróbuj ponownie.",
+            "chooseTitle": "Wybierz plik",
+            "chooseBody": "{name} zawiera kilka plików. Wybierz ten, który chcesz zainstalować",
+            "unavailable": "Nie można zaktualizować {name} z Modrex."
         },
         "pakViewer": {
             "title": "Zawartość pliku pak",
@@ -241,6 +247,7 @@
             "noUpdates": "Wszystko jest aktualne.",
             "noMissingDeps": "Wszystkie zainstalowane mody mają spełnione zależności.",
             "missingFileHint": "Brak pliku na dysku",
+            "containerMissingHint": "Brakuje jego plików .ucas i .utoc na dysku",
             "brokenArchiveHint": "Nie można zweryfikować archiwum",
             "outdatedHint": "Zalecana przeinstalacja",
             "unidentifiedRowHint": "Nierozpoznany",
@@ -248,7 +255,16 @@
             "installDep": "Zainstaluj",
             "installAllDeps": "Zainstaluj wszystkie zależności",
             "installDepFailed": "Niektórych zależności nie udało się zainstalować automatycznie.",
-            "reinstallAll": "Przeinstalować wszystkie"
+            "reinstallAll": "Przeinstalować wszystkie",
+            "leftoversCount": "Pozostałe pliki ({count})",
+            "noLeftovers": "Brak pozostałych plików.",
+            "leftoversLoadFailed": "Nie udało się wyświetlić pozostałych plików: {error}",
+            "leftoverHint": "{files}, {size}. Żaden z zainstalowanych modów nie używa tych plików.",
+            "deleteLeftover": "Usuń",
+            "confirmDelete": "Potwierdź",
+            "deleteAllLeftovers": "Usuń wszystkie",
+            "confirmDeleteAll": "Potwierdź usunięcie wszystkich",
+            "deleteLeftoversFailed": "Niektórych pozostałych plików nie udało się usunąć: {error}"
         }
     },
     "news": {
