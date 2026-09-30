@@ -14,6 +14,11 @@ All notable changes to Modrex are documented in this file. Each version's sectio
 - Mod descriptions now look the way they do on ModWorkshop and Nexus.
 - Health Check stays open while it reinstalls mods or installs dependencies, reinstalls mods one at a time, and shows which ones failed.
 
+### Changed
+
+- Startup no longer runs the Microsoft Store lookup for a game more than once at a time.
+- The game picker no longer changes which copy of a game is selected while working out which games are installed.
+
 ### Fixed
 
 - Fixed Restart & Install not restarting Modrex on Linux after installing an update.
